@@ -27,13 +27,30 @@ module.exports = merge(base, {
       template: path.resolve(__dirname, "app/src/index.html"),
       filename: "index.html"
     }),
+    
     new CspHtmlWebpackPlugin({
       "base-uri": ["'self'"],
       "object-src": ["'none'"],
-      "script-src": ["'self'"],
-      "style-src": ["'self'"],
+      "script-src": ["'self'", "https://api.openai.com/v1/chat/completions"],
+      "style-src": ["'self'", "'unsafe-eval'", /*"'unsafe-inline'",*/ "'unsafe-hashes'",
+      "'sha256-BCpnf71gZdCsSCHDzyB1RsBbZ0qQdqseK6v+yJsgg30='",
+      "'sha256-io1cubr8M3cYl5FCyjKN7PYudmj8FPk6GgH/ja6EeOo='",
+      "'sha256-BZbd3sNVZo05Chje1pmwuHKXHu1X6laHBGQxUzjkxjE='",
+      "'sha256-dQ2AxSQ4REabLHyw+DAG55A+oxWvwMK7jd/uG7fV1EU='",
+      "'sha256-nga9RGMJyBm/Iqp0FH5UX9+og2Qb4bDtYs2WHl6juuk='",
+      "'sha256-ysOwxBJdd3IFYrdfUfQOvYB45bQ2cyH2ptcv+ZrKeas='",
+      "'sha256-ey4JlZuWcrtqSi3+trECYIHmX4k/DOgbeq0gQiD7/no='",
+      "'sha256-XnfUjLlIYA4VjFL5Jap4t8PYNiiU8LwTWWhBwaH1zxs='",
+      "'sha256-XnfUjLlIYA4VjFL5Jap4t8PYNiiU8LwTWWhBwaH1zxs='",
+      "'sha256-0EZqoz+oBhx7gF4nvY2bSqoGyy4zLjNF+SDQXGp/ZrY='"], // Added 'unsafe-inline', 'unsafe-hashes' and removed nonce values from the style-src directive
       "frame-src": ["'none'"],
       "worker-src": ["'none'"]
     })
-  ]
+  
+  ],
+  resolve: {
+    fallback: {
+      fs: false
+    }
+  }
 })

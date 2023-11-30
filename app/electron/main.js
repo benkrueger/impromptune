@@ -127,6 +127,9 @@ async function createWindow() {
           win.webContents.openDevTools();
         });
     });
+    win.webContents.on('console-message', (event, level, message, line, sourceId) => {
+      console.log(`[Renderer] ${message} at ${sourceId}:${line}`);
+    });
   }
 
   // Emitted when the window is closed.
@@ -299,4 +302,13 @@ app.on("web-contents-created", (event, contents) => {
       action: "allow"
     };
   });
+});
+ipcMain.handle('write-file', async (event, { filePath, content }) => {
+  try {
+    await fs.promises.writeFile(filePath, content);
+    return { success: true };
+  } catch (error) {
+    console.error('Failed to write file:', error);
+    return { success: false, error: error.message };
+  }
 });

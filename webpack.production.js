@@ -18,18 +18,19 @@ module.exports = merge(base, {
     }),
     // You can paste your CSP in this website https://csp-evaluator.withgoogle.com/
     // for it to give you suggestions on how strong your CSP is
+    
     new CspHtmlWebpackPlugin(
       {
         "base-uri": ["'self'"],
         "object-src": ["'none'"],
         "script-src": ["'self'"],
-        "style-src": ["'self'"],
+        //"style-src": ["'self' 'unsafe-inline'"],
         "frame-src": ["'none'"],
         "worker-src": ["'none'"]
       },
       {
         hashEnabled: {
-          "style-src": false
+          "style-src": true
         }
       }
     )
