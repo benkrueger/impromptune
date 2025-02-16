@@ -1,4 +1,6 @@
-import { renderAbc } from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
+// Change from using named import to accessing ABCJS global
+// Remove this line:
+// import { renderAbc } from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
 
 document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -8,6 +10,7 @@ document.getElementById('music-form').addEventListener('submit', async function(
 
     const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
 
+    // Change renderAbc to ABCJS.renderAbc
     ABCJS.renderAbc('music-sheet', abcNotation);
 });
 
