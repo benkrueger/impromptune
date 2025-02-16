@@ -4,8 +4,34 @@ document.getElementById('music-form').addEventListener('submit', async function(
     const key = document.getElementById('key').value;
     const timeSignature = document.getElementById('time-signature').value;
 
-    const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
-    ABCJS.renderAbc('music-sheet', abcNotation);
+    try {
+        const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
+        
+        // Clear any existing content
+        document.getElementById('music-sheet').innerHTML = '';
+        document.getElementById('audio-controls').innerHTML = '';
+        
+        // Render the music sheet
+        const visualObj = ABCJS.renderAbc('music-sheet', abcNotation)[0];
+        
+        // Initialize audio controls
+        const synthControl = new ABCJS.synth.SynthController();
+        synthControl.load("#audio-controls", null, {
+            displayLoop: true,
+            displayRestart: true,
+            displayPlay: true,
+            displayProgress: true,
+            displayWarp: true
+        });
+        
+        synthControl.setTune(visualObj, true);
+        
+        // Show the containers
+        document.getElementById('music-sheet').style.display = 'block';
+        document.getElementById('audio-controls').style.display = 'block';
+    } catch (error) {
+        console.error('Error:', error);
+    }
 });
 
 async function generateMusicWithLLM(prompt, key, timeSignature) {
@@ -57,4 +83,3 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
 }
 
 
-// ... existing code...
