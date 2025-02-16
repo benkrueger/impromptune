@@ -1,0 +1,23 @@
+{
+  "name": "impromptune",
+  "version": "1.0.0",
+  "description": "Use an LLM to quickly generate sheet music!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benkrueger/impromptune.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benkrueger/impromptune/issues"
+  },
+  "homepage": "https://github.com/benkrueger/impromptune#readme",
+  "dependencies": {
+    "abcjs": "^6.4.4"
+  }
+}

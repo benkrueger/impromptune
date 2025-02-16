@@ -1,3 +1,5 @@
+import ABCJS from 'abcjs';
+
 document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const prompt = document.getElementById('prompt').value;
@@ -8,19 +10,18 @@ document.getElementById('music-form').addEventListener('submit', async function(
     const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
     
     // Render the music with ABCJS
-    // ABCJS.renderAbc('music-sheet', abcNotation);
+    ABCJS.renderAbc('music-sheet', abcNotation);
 });
 
 async function generateMusicWithLLM(prompt, key, timeSignature) {
-    // Example fetch call to your Cloudflare Worker API
-    // const response = await fetch('/api/generate-music', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ prompt, key, timeSignature })
-    // });
-    //
-    // const data = await response.json();
-    // return data.abcNotation;
+    // Return a dummy ABC notation string
+    const abcNotation = `
+        X: 1
+        T: Dummy Tune
+        M: ${timeSignature || '4/4'}
+        K: ${key || 'C'}
+        L: 1/4
+        C D E F | G A B c ||
+    `;
+    return abcNotation;
 }
