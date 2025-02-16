@@ -1,8 +1,2 @@
 name = "impromptune"
-main = "worker/index.js"
-[build]
-command = "npm run build"
-[site]
-bucket = "./public"
-[env.production]
-name = "impromptune"
+pages_build_output_dir = "public"  # Required for Cloudflare Pages
