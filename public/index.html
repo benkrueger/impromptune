@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Generate Sheet Music</h1>
+    <form id="music-form">
+        <label for="prompt">Enter your inspiration:</label>
+        <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea>
+
+        <label for="key">Key:</label>
+        <select id="key" name="key">
+            <!-- Options for musical keys -->
+        </select>
+
+        <label for="time-signature">Time Signature:</label>
+        <select id="time-signature" name="time-signature">
+            <!-- Options for time signatures -->
+        </select>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    <div id="music-sheet">
+        <!-- ABCJS will render here -->
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

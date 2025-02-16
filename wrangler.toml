@@ -1,0 +1,16 @@
+name = "impromptune"
+type = "javascript"
+account_id = "d177c20ee4bdec62d8a1e1445154108b"
+workers_dev = true
+
+[build]
+command = "npm run build"
+
+[site]
+bucket = "./public"
+entry-point = "workers-site"
+
+[env.production]
+name = "music-generator"
+bucket = "./public"
+entry-point = "workers-site"
