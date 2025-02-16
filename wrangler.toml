@@ -5,12 +5,12 @@ workers_dev = true
 
 [build]
 command = "npm run build"
+upload = { format = "service-worker" }
 
 [site]
 bucket = "./public"
 entry-point = "workers-site"
+pages_build_output_dir = "./public"
 
 [env.production]
-name = "music-generator"
-bucket = "./public"
-entry-point = "workers-site"
+name = "impromptune"
