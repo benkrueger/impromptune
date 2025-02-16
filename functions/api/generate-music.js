@@ -14,11 +14,11 @@ export async function onRequestPost(context) {
                     messages: [
                         {
                             role: "system",
-                            content: "You are a music composer assistant. Generate ABC notation format music. Always include the header with X, T, M, K, and L fields. Make the music match the requested style and constraints."
+                            content: "You are a music composer assistant. Generate ABC notation format music. YOUR ONLY OUTPUT SHOULD BE VALID ABCJS. Always include the header with X, T, M, K, and L fields. Make the music match the requested style and constraints."
                         },
                         {
                             role: "user",
-                            content: `Create a melody in ABC notation format with the following constraints: Key: ${key || 'C'}, Time Signature: ${timeSignature || '4/4'}. Style description: ${prompt}`
+                            content: `Create a melody in ABC notation format with the following constraints: Key: ${key || 'C'}, Time Signature: ${timeSignature || '4/4'}. Style description: ${prompt} OUTPUT ONLY ABCJS VALID STRINGS. DO NOT INCLUDE ANY EXPLANATION OR DESCRIPTION OF YOUR RESPONSE.`
                         }
                     ]
                 })

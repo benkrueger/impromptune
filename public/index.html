@@ -24,8 +24,7 @@
     <h1>Impromptune: Generate Sheet Music with LLMs!</h1>
     <form id="music-form">
         <label for="prompt">Enter your inspiration:</label>
-        <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea>
-
+        <textarea id="prompt" name="prompt" rows="4" cols="50">A song about a cat</textarea>
         <label for="key">Key:</label>
         <select id="key" name="key">
             <option value="C">C Major / A minor</option>
@@ -72,27 +71,6 @@
     <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const abcString = `
-                    X: 1
-                    T: Cooley's
-                    M: 4/4
-                    L: 1/8
-                    K: Emin
-                    |:D2|"Em"EBBA B2 EB|\
-                        ~B2 AB dBAG|\
-                        "D"FDAD BDAD|\
-                        FDAD dAFD|
-                    "Em"EBBA B2 EB|\
-                        B2 AB defg|\
-                        "D"afe^c dBAF|\
-                        "Em"DEFD E2:|
-                    |:gf|"Em"eB B2 efge|\
-                        eB B2 gedB|\
-                        "D"A2 FA DAFA|\
-                        A2 FA defg|
-                    "Em"eB B2 eBgB|\
-                        eB B2 defg|\
-                        "D"afe^c dBAF|\
-                        "Em"DEFD E2:|
                 `;
 
                 ABCJS.renderAbc("music-sheet", abcString);
