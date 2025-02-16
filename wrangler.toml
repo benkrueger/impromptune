@@ -1,2 +1,5 @@
 name = "impromptune"
 pages_build_output_dir = "public"  # Required for Cloudflare Pages
+
+[build]
+command = "npm run build"
