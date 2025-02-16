@@ -1,5 +1,4 @@
-
-import ABCJS from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
+import { renderAbc } from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
 
 document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
