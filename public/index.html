@@ -7,26 +7,69 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Generate Sheet Music</h1>
+    <h1>Impromptune: Generate Sheet Music with LLMs!</h1>
     <form id="music-form">
         <label for="prompt">Enter your inspiration:</label>
         <textarea id="prompt" name="prompt" rows="4" cols="50"></textarea>
 
         <label for="key">Key:</label>
         <select id="key" name="key">
-            <!-- Options for musical keys -->
+            <option value="C">C Major / A minor</option>
+            <option value="G">G Major / E minor</option>
+            <option value="D">D Major / B minor</option>
+            <option value="A">A Major / F# minor</option>
+            <option value="E">E Major / C# minor</option>
+            <option value="B">B Major / G# minor</option>
+            <option value="F#">F# Major / D# minor</option>
+            <option value="C#">C# Major / A# minor</option>
+            <option value="F">F Major / D minor</option>
+            <option value="Bb">Bb Major / G minor</option>
+            <option value="Eb">Eb Major / C minor</option>
+            <option value="Ab">Ab Major / F minor</option>
+            <option value="Db">Db Major / Bb minor</option>
+            <option value="Gb">Gb Major / Eb minor</option>
+            <option value="Cb">Cb Major / Ab minor</option>
         </select>
 
         <label for="time-signature">Time Signature:</label>
         <select id="time-signature" name="time-signature">
-            <!-- Options for time signatures -->
+            <option value="2/4">2/4</option>
+            <option value="3/4">3/4</option>
+            <option value="4/4">4/4</option>
+            <option value="5/4">5/4</option>
+            <option value="6/4">6/4</option>
+            <option value="7/4">7/4</option>
+            <option value="3/8">3/8</option>
+            <option value="6/8">6/8</option>
+            <option value="9/8">9/8</option>
+            <option value="12/8">12/8</option>
         </select>
 
         <button type="submit">Generate</button>
     </form>
 
     <div id="music-sheet">
-        <!-- ABCJS will render here -->
+        <div id="audio-controls"></div> <!-- Audio controls for playback -->
+
+        <script>
+            // Placeholder ABC string
+            const abcString = `
+                X:1
+                T:Placeholder Tune
+                M:4/4
+                L:1/4
+                K:C
+                C D E F | G A B c ||
+            `;
+
+            // Initialize ABCJS rendering
+            ABCJS.renderAbc("music-sheet", abcString);
+
+            // Initialize the ABCJS synth for playback
+            var synthControl = new ABCJS.synth.SynthController();
+            synthControl.load("#audio-controls", null, { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true, displayWarp: true });
+            synthControl.setTune(ABCJS.renderAbc("music-sheet", abcString)[0], true);
+        </script>
     </div>
 
     <script src="app.js"></script>
