@@ -1,5 +1,5 @@
 name = "impromptune"
-main = "worker/index.js"
+pages_build_output_dir = "public"
 [build]
 command = "npm run build"
 [site]
