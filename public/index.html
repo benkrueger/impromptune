@@ -72,12 +72,27 @@
     <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const abcString = `
-                    X:1
-                    T:Placeholder Tune
-                    M:4/4
-                    L:1/4
-                    K:C
-                    C D E F | G A B c ||
+                    X: 1
+                    T: Cooley's
+                    M: 4/4
+                    L: 1/8
+                    K: Emin
+                    |:D2|"Em"EBBA B2 EB|\
+                        ~B2 AB dBAG|\
+                        "D"FDAD BDAD|\
+                        FDAD dAFD|
+                    "Em"EBBA B2 EB|\
+                        B2 AB defg|\
+                        "D"afe^c dBAF|\
+                        "Em"DEFD E2:|
+                    |:gf|"Em"eB B2 efge|\
+                        eB B2 gedB|\
+                        "D"A2 FA DAFA|\
+                        A2 FA defg|
+                    "Em"eB B2 eBgB|\
+                        eB B2 defg|\
+                        "D"afe^c dBAF|\
+                        "Em"DEFD E2:|
                 `;
 
                 ABCJS.renderAbc("music-sheet", abcString);
