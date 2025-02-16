@@ -1,7 +1,7 @@
-<script type="module">
-    import ABCJS from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
 
-    document.getElementById('music-form').addEventListener('submit', async function(event) {
+import ABCJS from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
+
+document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const prompt = document.getElementById('prompt').value;
     const key = document.getElementById('key').value;
@@ -23,4 +23,3 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
     `;
     return abcNotation;
 }
-</script>
