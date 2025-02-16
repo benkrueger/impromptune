@@ -1,4 +1,4 @@
-import ABCJS from 'abcjs';
+import ABCJS from './node_modules/abcjs/dist/abcjs-basic.min.js';
 
 document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
