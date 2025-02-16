@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Generator</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #audio-controls {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        #audio-controls svg {
+            width: 24px;
+            height: 24px;
+        }
+        #audio-controls .abcjs-inline-audio {
+            height: auto;
+            padding: 8px;
+        }
+    </style>
 </head>
 <body>
     <h1>Impromptune: Generate Sheet Music with LLMs!</h1>
@@ -50,10 +64,12 @@
 
     <div id="music-sheet"></div>
         <div id="audio-controls"></div>
+    <div id="music-sheet"></div>
+    <div id="audio-controls"></div>
 
-        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
-        <script src="app.js" type="module" defer></script>
-        <script>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
+    <script src="app.js" type="module" defer></script>
+    <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const abcString = `
                     X:1
