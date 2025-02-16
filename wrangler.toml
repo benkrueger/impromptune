@@ -1,24 +1,7 @@
 name = "impromptune"
-
-# Pages configuration
 pages_build_output_dir = "public"
-
-# Worker configuration
-main = "worker/worker.js"
 compatibility_date = "2024-02-16"
-
-[build]
-command = ""  # Add build command if needed
 
 [env.production]
 vars = { ENVIRONMENT = "production" }
-# Move AI binding into the production environment
 ai = { binding = "AI" }
-
-# Workers need to be defined as functions for Pages integration
-[[functions]]
-pattern = "/api/*"
-worker = "worker/worker.js"
-
-[vars]
-# Add any non-secret environment variables here

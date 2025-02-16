@@ -3,7 +3,7 @@ export default {
         // Only handle /api/generate-music
         const url = new URL(request.url);
         if (url.pathname !== '/api/generate-music') {
-            return new Response('Not found', { status: 404 });
+            return env.ASSETS.fetch(request);  // Let Pages handle non-API requests
         }
 
         if (request.method !== 'POST') {
