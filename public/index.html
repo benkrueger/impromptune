@@ -50,6 +50,8 @@
 
     <div id="music-sheet">
         <div id="audio-controls"></div>
+        <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
+        <script src="app.js" type="module" defer></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const abcString = `
@@ -69,7 +71,6 @@
             });
         </script>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
-    <script src="app.js" type="module" defer></script>
+
 </body>
 </html>
