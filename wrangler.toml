@@ -1,2 +1,25 @@
 name = "impromptune"
 pages_build_output_dir = "public"  # Required for Cloudflare Pages
+
+# Worker configuration
+[build]
+command = ""  # Add build command if needed
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+# Worker AI binding
+[ai]
+binding = "AI"  # This makes AI available in your worker
+
+# Define route for the API endpoint
+[[routes]]
+pattern = "/api/*"
+script = "worker/worker.js"
+
+# Configure environment variables that the Worker needs
+[vars]
+# Add any non-secret environment variables here
+
+# For secrets, use wrangler secret put CLOUDFLARE_AUTH_TOKEN
+# and wrangler secret put CLOUDFLARE_ACCOUNT_ID
