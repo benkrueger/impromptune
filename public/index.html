@@ -48,8 +48,9 @@
         <button type="submit">Generate</button>
     </form>
 
-    <div id="music-sheet">
+    <div id="music-sheet"></div>
         <div id="audio-controls"></div>
+
         <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
         <script src="app.js" type="module" defer></script>
         <script>
@@ -66,21 +67,6 @@
                 ABCJS.renderAbc("music-sheet", abcString);
 
                 var synthControl = new ABCJS.synth.SynthController();
-                synthControl.load("#audio-controls", null, { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true, displayWarp: true });
-                document.addEventListener('DOMContentLoaded', function() {
-                const abcString = `
-                    X:1
-                    T:Placeholder Tune
-                    M:4/4
-                    L:1/4
-                    K:C
-                    C D E F | G A B c ||
-                `;
-                ABCJS.renderAbc("music-sheet", abcString);
-
-                var synthControl = new ABCJS.synth.SynthController();
-
-                // Ensure #audio-controls exists and is passed properly:
                 synthControl.load("#audio-controls", null, {
                     displayLoop: true,
                     displayRestart: true,
@@ -89,12 +75,9 @@
                     displayWarp: true
                 });
 
-                synthControl.setTune(ABCJS.renderAbc("music-sheet", abcString)[0], true);
+            var visualObj = ABCJS.renderAbc("music-sheet", abcString)[0];
+            synthControl.setTune(visualObj, true);
                 });
-
-            });
         </script>
-    </div>
-
 </body>
 </html>
