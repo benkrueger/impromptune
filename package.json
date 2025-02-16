@@ -4,7 +4,8 @@
   "description": "Use an LLM to quickly generate sheet music!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,9 @@
   "homepage": "https://github.com/benkrueger/impromptune#readme",
   "dependencies": {
     "abcjs": "^6.4.4"
+  },
+  "devDependencies": {
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1"
   }
 }
