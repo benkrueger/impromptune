@@ -1,20 +1,18 @@
-import ABCJS from 'abcjs';
+<script type="module">
+    import ABCJS from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js';
 
-document.getElementById('music-form').addEventListener('submit', async function(event) {
+    document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const prompt = document.getElementById('prompt').value;
     const key = document.getElementById('key').value;
     const timeSignature = document.getElementById('time-signature').value;
-    
-    // Call your Cloudflare Worker here to get the ABC notation from the LLM
+
     const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
-    
-    // Render the music with ABCJS
+
     ABCJS.renderAbc('music-sheet', abcNotation);
 });
 
 async function generateMusicWithLLM(prompt, key, timeSignature) {
-    // Return a dummy ABC notation string
     const abcNotation = `
         X: 1
         T: Dummy Tune
@@ -25,3 +23,4 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
     `;
     return abcNotation;
 }
+</script>
