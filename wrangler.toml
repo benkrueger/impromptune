@@ -1,16 +1,8 @@
 name = "impromptune"
-type = "javascript"
-account_id = "d177c20ee4bdec62d8a1e1445154108b"
-workers_dev = true
-pages_build_output_dir = "./public"
+main = "worker/index.js"
 [build]
 command = "npm run build"
-upload = { format = "service-worker" }
-
 [site]
 bucket = "./public"
-entry-point = "workers-site"
-
-
 [env.production]
 name = "impromptune"
