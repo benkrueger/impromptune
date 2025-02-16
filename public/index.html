@@ -49,10 +49,8 @@
     </form>
 
     <div id="music-sheet">
-        <div id="audio-controls"></div> <!-- Audio controls for playback -->
-
+        <div id="audio-controls"></div>
         <script>
-            // Placeholder ABC string
             const abcString = `
                 X:1
                 T:Placeholder Tune
@@ -62,16 +60,15 @@
                 C D E F | G A B c ||
             `;
 
-            // Initialize ABCJS rendering
             ABCJS.renderAbc("music-sheet", abcString);
 
-            // Initialize the ABCJS synth for playback
             var synthControl = new ABCJS.synth.SynthController();
             synthControl.load("#audio-controls", null, { displayLoop: true, displayRestart: true, displayPlay: true, displayProgress: true, displayWarp: true });
             synthControl.setTune(ABCJS.renderAbc("music-sheet", abcString)[0], true);
         </script>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@latest/abcjs_basic_min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
