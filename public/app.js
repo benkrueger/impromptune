@@ -1,17 +1,24 @@
+import ABCJS from 'abcjs';
+
 document.getElementById('music-form').addEventListener('submit', async function(event) {
     event.preventDefault();
     const prompt = document.getElementById('prompt').value;
     const key = document.getElementById('key').value;
     const timeSignature = document.getElementById('time-signature').value;
-
+    
+    // Show loading indicator and disable form
+    document.getElementById('loading-indicator').style.display = 'block';
+    document.getElementById('music-form').querySelector('button').disabled = true;
+    
     try {
+        // Call your Cloudflare Worker here to get the ABC notation from the LLM
         const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
         
         // Clear any existing content
         document.getElementById('music-sheet').innerHTML = '';
         document.getElementById('audio-controls').innerHTML = '';
         
-        // Render the music sheet
+        // Render the music with ABCJS
         const visualObj = ABCJS.renderAbc('music-sheet', abcNotation)[0];
         
         // Initialize audio controls
@@ -31,6 +38,10 @@ document.getElementById('music-form').addEventListener('submit', async function(
         document.getElementById('audio-controls').style.display = 'block';
     } catch (error) {
         console.error('Error:', error);
+    } finally {
+        // Hide loading indicator and re-enable form
+        document.getElementById('loading-indicator').style.display = 'none';
+        document.getElementById('music-form').querySelector('button').disabled = false;
     }
 });
 
@@ -81,5 +92,3 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
         `;
     }
 }
-
-
