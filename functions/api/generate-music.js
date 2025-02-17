@@ -2,6 +2,39 @@ export async function onRequestPost(context) {
     try {
         const { prompt, key, timeSignature } = await context.request.json();
 
+        // First API call to analyze the request and get a descriptive paragraph
+        const analysisResponse = await fetch(
+            `https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-70b-instruct`,
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${context.env.CLOUDFLARE_AUTH_TOKEN}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are a music composer assistant. Analyze the user request and provide a descriptive paragraph about the song style and nature. Be descriptive about what you want out of the song."
+                        },
+                        {
+                            role: "user",
+                            content: `Analyze the following style: ${prompt}`
+                        }
+                    ]
+                })
+            }
+        );
+
+        const analysisResult = await analysisResponse.json();
+        
+        if (!analysisResult.result || !analysisResult.result.response) {
+            throw new Error('Invalid AI response format during analysis');
+        }
+
+        const analysisParagraph = analysisResult.result.response;
+
+        // Second API call to generate the ABCJS notation
         const aiResponse = await fetch(
             `https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-70b-instruct`,
             {
@@ -18,7 +51,7 @@ export async function onRequestPost(context) {
                         },
                         {
                             role: "user",
-                            content: `Create a melody in ABC notation format with the following constraints: Key: ${key || 'C'}, Time Signature: ${timeSignature || '4/4'}. Style description: ${prompt} OUTPUT ONLY ABCJS VALID STRINGS. DO NOT INCLUDE ANY EXPLANATION OR DESCRIPTION OF YOUR RESPONSE.`
+                            content: `Create a melody in ABC notation format based on analysis: ${analysisParagraph}. Key: ${key || 'C'}, Time Signature: ${timeSignature || '4/4'}. OUTPUT ONLY ABCJS VALID STRINGS. DO NOT INCLUDE ANY EXPLANATION OR DESCRIPTION OF YOUR RESPONSE.`
                         }
                     ]
                 })
@@ -28,7 +61,7 @@ export async function onRequestPost(context) {
         const result = await aiResponse.json();
         
         if (!result.result || !result.result.response) {
-            throw new Error('Invalid AI response format');
+            throw new Error('Invalid AI response format during music generation');
         }
 
         return new Response(result.result.response, {
