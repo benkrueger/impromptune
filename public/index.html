@@ -58,7 +58,6 @@
             <option value="Gb">Gb Major / Eb minor</option>
             <option value="Cb">Cb Major / Ab minor</option>
         </select>
-
         <label for="time-signature">Time Signature:</label>
         <select id="time-signature" name="time-signature">
             <option value="2/4">2/4</option>
@@ -72,17 +71,14 @@
             <option value="9/8">9/8</option>
             <option value="12/8">12/8</option>
         </select>
-
         <button type="submit">Generate</button>
     </form>
-
-    <div id="loading-indicator">
+    <div id="loading-indicator" style="display: none;">
         <div class="spinner"></div>
         <p>Generating your music...</p>
     </div>
-
-    <div id="music-sheet"></div>
-    <div id="audio-controls"></div>
+    <div id="music-sheet" style="display: none;"></div>
+    <div id="audio-controls" style="display: none;"></div>
     <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
     <script src="app.js" type="module" defer></script>
 </body>
