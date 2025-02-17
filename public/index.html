@@ -7,35 +7,36 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/abcjs-audio.css"/>
     <style>
-        #audio-controls {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 15px;
-            background: #333;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        #audio-controls svg {
-            width: 24px;
-            height: 24px;
-            fill: #ccc;
-        }
-        #audio-controls .abcjs-inline-audio {
-            height: auto;
-            padding: 8px;
-            background: #444;
-            border-radius: 4px;
-        }
-        #music-sheet {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: #222;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            color: #ccc;
-        }
-    </style>
+    #audio-controls {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 15px;
+        background: #333;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    #audio-controls svg {
+        width: 24px;
+        height: 24px;
+        fill: #ccc;
+    }
+    #audio-controls .abcjs-inline-audio {
+        height: auto;
+        padding: 8px;
+        margin: 0;
+        background: #444;
+        border-radius: 4px;
+    }
+    #music-sheet {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 0; /* Ensure any default padding is unset */
+        background: #222;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        color: #ccc;
+    }
+</style>
 </head>
 <body>
     <h1>Impromptune: Generate Sheet Music with LLMs!</h1>
@@ -83,6 +84,7 @@
     </div>
     <div id="music-sheet" style="display: none;"></div>
     <div id="audio-controls" style="display: none;"></div>
+    <button id="download-png" style="display: none;">Download as PNG</button>
     <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
     <script src="app.js" type="module" defer></script>
 </body>

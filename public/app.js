@@ -5,20 +5,16 @@ document.getElementById('music-form').addEventListener('submit', async function(
     const prompt = document.getElementById('prompt').value;
     const key = document.getElementById('key').value;
     const timeSignature = document.getElementById('time-signature').value;
-    
-    // Show loading indicator and disable form
+
     document.getElementById('loading-indicator').style.display = 'block';
     document.getElementById('music-form').querySelector('button').disabled = true;
-    
+
     try {
-        // Call your Cloudflare Worker here to get the ABC notation from the LLM
         const abcNotation = await generateMusicWithLLM(prompt, key, timeSignature);
-        
-        // Clear any existing content
+
         document.getElementById('music-sheet').innerHTML = '';
         document.getElementById('audio-controls').innerHTML = '';
-        
-        // Render music with better audio player
+
         if (ABCJS.synth.supportsAudio()) {
             const visualObj = ABCJS.renderAbc('music-sheet', abcNotation, {
                 responsive: "resize",
@@ -37,18 +33,23 @@ document.getElementById('music-form').addEventListener('submit', async function(
                 displayLoop: true
             });
             synthControl.setTune(visualObj, false);
+
+            document.getElementById('download-png').style.display = 'block';
+            document.getElementById('download-png').onclick = function() {
+                const svg = document.querySelector('#music-sheet svg');
+                svg.style.marginBottom = "0";
+                downloadSvgAsPng(svg);
+            };
         } else {
-            document.querySelector("#audio-controls").innerHTML = 
+            document.querySelector("#audio-controls").innerHTML =
                 "<div class='audio-error'>Audio is not supported in this browser.</div>";
         }
-        
-        // Show the containers
+
         document.getElementById('music-sheet').style.display = 'block';
         document.getElementById('audio-controls').style.display = 'block';
     } catch (error) {
         console.error('Error:', error);
     } finally {
-        // Hide loading indicator and re-enable form
         document.getElementById('loading-indicator').style.display = 'none';
         document.getElementById('music-form').querySelector('button').disabled = false;
     }
@@ -56,7 +57,6 @@ document.getElementById('music-form').addEventListener('submit', async function(
 
 async function generateMusicWithLLM(prompt, key, timeSignature) {
     try {
-        // Make request to your Worker endpoint instead of directly to Cloudflare AI
         const response = await fetch('/api/generate-music', {
             method: 'POST',
             headers: {
@@ -74,8 +74,7 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
         }
 
         const abcNotation = await response.text();
-        
-        // Basic error handling if response isn't valid ABC notation
+
         if (!abcNotation.includes('X:') || !abcNotation.includes('K:')) {
             return `
                 X: 1
@@ -90,7 +89,6 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
         return abcNotation;
     } catch (error) {
         console.error('Error generating music:', error);
-        // Return fallback notation if there's an error
         return `
             X: 1
             T: Error Fallback Tune
@@ -100,4 +98,29 @@ async function generateMusicWithLLM(prompt, key, timeSignature) {
             C D E F | G A B c ||
         `;
     }
+}
+
+function downloadSvgAsPng(svgElement) {
+    const data = new XMLSerializer().serializeToString(svgElement);
+    const svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+    const DOMURL = window.URL || window.webkitURL || window;
+    const url = DOMURL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = function() {
+        const canvas = document.createElement('canvas');
+        canvas.width = svgElement.clientWidth;
+        canvas.height = svgElement.clientHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0);
+        const png = canvas.toDataURL('image/png');
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = png;
+        downloadLink.download = 'music-sheet.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        DOMURL.revokeObjectURL(url);
+    };
+    img.src = url;
 }
