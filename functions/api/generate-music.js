@@ -3,7 +3,7 @@ export async function onRequestPost(context) {
         const { prompt, key, timeSignature } = await context.request.json();
 
         const aiResponse = await fetch(
-            `https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`,
+            `https://api.cloudflare.com/client/v4/accounts/${context.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-70b-instruct`,
             {
                 method: 'POST',
                 headers: {
