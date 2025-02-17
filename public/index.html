@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Generator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/abcjs-audio.css"/>
     <style>
         #audio-controls {
             max-width: 600px;
+            max-width: 800px;
             margin: 20px auto;
             display: none;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         #audio-controls svg {
             width: 24px;
@@ -18,31 +24,17 @@
         #audio-controls .abcjs-inline-audio {
             height: auto;
             padding: 8px;
+            background: #fff;
+            border-radius: 4px;
         }
         #music-sheet {
             display: none;
-        }
-        #loading-indicator {
-            display: none;
-            text-align: center;
-            margin: 20px 0;
-        }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -68,7 +60,6 @@
             <option value="Db">Db Major / Bb minor</option>
             <option value="Gb">Gb Major / Eb minor</option>
             <option value="Cb">Cb Major / Ab minor</option>
-            // ... existing code ...
         </select>
 
         <label for="time-signature">Time Signature:</label>
@@ -83,7 +74,6 @@
             <option value="6/8">6/8</option>
             <option value="9/8">9/8</option>
             <option value="12/8">12/8</option>
-            // ... existing code ...
         </select>
 
         <button type="submit">Generate</button>
@@ -95,10 +85,26 @@
     </div>
 
     <div id="music-sheet"></div>
-        <div id="audio-controls"></div>
     <div id="audio-controls"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
     <script src="app.js" type="module" defer></script>
 </body>
+</html>
+
+        <button type="submit">Generate</button>
+    </form>
+
+    <div id="music-sheet"></div>
+        <div id="audio-controls"></div>
+    <div id="music-sheet"></div>
+        <div id="audio-controls"></div>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.4/dist/abcjs-basic.min.js" defer></script>
+    <div id="loading-indicator">
+        <div class="spinner"></div>
+        <p>Generating your music...</p>
+    </div>
+
+    <div id="music-sheet"></div>
+    <div id="audio-controls"></div>
+    <script src="https://cdn.jsdelivr.net/npm/abcjs@6.2.2/dist/abcjs-basic-min.js"></script>
 </html>

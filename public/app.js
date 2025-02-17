@@ -18,20 +18,29 @@ document.getElementById('music-form').addEventListener('submit', async function(
         document.getElementById('music-sheet').innerHTML = '';
         document.getElementById('audio-controls').innerHTML = '';
         
-        // Render the music with ABCJS
-        const visualObj = ABCJS.renderAbc('music-sheet', abcNotation)[0];
-        
-        // Initialize audio controls
-        const synthControl = new ABCJS.synth.SynthController();
-        synthControl.load("#audio-controls", null, {
-            displayLoop: true,
-            displayRestart: true,
-            displayPlay: true,
-            displayProgress: true,
-            displayWarp: true
-        });
-        
-        synthControl.setTune(visualObj, true);
+        // Render music with better audio player
+        if (ABCJS.synth.supportsAudio()) {
+            const visualObj = ABCJS.renderAbc('music-sheet', abcNotation, {
+                responsive: "resize",
+                format: {
+                    titlefont: '"itim-music,Itim" 24',
+                    gchordfont: '"itim-music,Itim" 20',
+                }
+            })[0];
+
+            const synthControl = new ABCJS.synth.SynthController();
+            synthControl.load("#audio-controls", null, {
+                displayRestart: true,
+                displayPlay: true,
+                displayProgress: true,
+                displayWarp: true,
+                displayLoop: true
+            });
+            synthControl.setTune(visualObj, false);
+        } else {
+            document.querySelector("#audio-controls").innerHTML = 
+                "<div class='audio-error'>Audio is not supported in this browser.</div>";
+        }
         
         // Show the containers
         document.getElementById('music-sheet').style.display = 'block';

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="abcjs - javascript library for rendering abc music notation on a website" />
+	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+	<link rel="me" href="https://hachyderm.io/@paulrosen">
+	<title>abcjs</title>
+
+	<meta property="og:url" content="https://abcjs.net" />
+	<meta property="og:title" content="abcjs: Javascript Music Library" />
+	<meta property="og:description" content="abcjs allows web designers and programmers to add sheet music and audio to their websites using the ABC music notation standard and a tiny amount of JavaScript. The music can be animated and can be dynamically created." />
+	<meta property="og:image" content="https://abcjs.net/abcjs-fb.png" />
+	<meta property="og:image:width" content="2850" />
+	<meta property="og:image:height" content="1470" />
+
+	<link href="application.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="abcjs-audio.css" media="all" rel="stylesheet" type="text/css" />
+	<script src="abcjs-basic-min.js" type="text/javascript"></script>
+	<script src="application.js" type="text/javascript"></script>
+	<script src="tabs.js" type="text/javascript"></script>
+
+	<link href="https://fonts.googleapis.com/css2?family=Inder&family=Noto+Serif+JP:wght@400;700&family=Itim&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper">
+	<header>
+<h1 class="header-image" aria-label="abcjs"></h1>
+<div class="sub-title">javascript for rendering abc music notation</div>
+		<button class="animated-hamburger" aria-expanded="false" aria-haspopup="true" aria-label="page menu"><span></span></button>
+		<div class="a11y-dropdown mobile-menu">
+			<ul role="menu">
+				<li class="current"><a aria-controls="what" href="#what" role='menuitem' aria-selected="true">What?</a></li>
+				<li><a aria-controls="why" href="#why" aria-selected='false' role='menuitem'>Why?</a></li>
+				<li><a aria-controls='how' href="#how" role='menuitem' aria-selected='false'>How?</a></li>
+				<li><a aria-controls='which' href="#which" role='menuitem' aria-selected='false'>Which?</a></li>
+				<li><a aria-controls='where' href="#where" role='menuitem' aria-selected='false'>Where?</a></li>
+				<li><a aria-controls='can-i' href="#can-i" role='menuitem' aria-selected='false'>Can I?</a></li>
+			</ul>
+		</div>
+	</header>
+
+	<main>
+	<div class="tabbed-content">
+		<nav>
+		<ul class="tabs-list" role='tablist'>
+			<li class="current">
+				<a aria-controls="what" id="tab-what" aria-selected="true" href="#what" role='tab' class='tab selected' title="What is this?">What?</a>
+			</li>
+
+			<li>
+				<a aria-controls="why" href="#why" id="tab-why" aria-selected='false' role='tab' tabindex='-1' class='tab' title="Why might I need this?">Why?</a>
+			</li>
+
+			<li class='last'>
+				<a aria-controls='how' id="tab-how" aria-selected="false" href="#how" role='tab' tabindex='-1' class='tab' title="How do I use this?">How?</a>
+			</li>
+
+			<li class='last'>
+				<a aria-controls='which' id="tab-which" aria-selected="false" href="#which" role='tab' tabindex='-1' class='tab' title="Which one do I need?">Which?</a>
+			</li>
+
+			<li class='last'>
+				<a aria-controls='where' id="tab-where" aria-selected="false" href="#where" role='tab' tabindex='-1' class='tab' title="Where do I get this?">Where?</a>
+			</li>
+
+			<li class='last'>
+				<a aria-controls='can-i' id="tab-can-i" aria-selected="false" href="#can-i" role='tab' tabindex='-1' class='tab' title="Can I use this in my own site?">Can I?</a>
+			</li>
+		</ul>
+		</nav>
+
+		<div aria-labelledby="tab-what" class="tab-panel current"  id="what" role='tabpanel'>
+			<h2>What is this?</h2>
+			<div class="example">
+				<div class="left">
+					<p>Turn this:</p>
+					<pre class="source"></pre>
+				</div>
+				<div class="engraving-container">
+					<p>Into this:</p>
+					<div id="engraving"></div>
+					<div id="main-midi"></div>
+				</div>
+			</div>
+			<p class="aside card"><em>What, you ask, is ABC Music Notation?</em><br>There are lots of explanations around the web. <a href="http://abcnotation.com/" target="_blank">Here's a good place to start.</a></p>
+		</div>
+
+		<div aria-labelledby="tab-why" class="tab-panel" role='tabpanel' id="why">
+			<h2>Why might I need this?</h2>
+			<div class="deck">
+			<section class="card">
+			<p>This library is for a <em>web designer</em> or a <em>web programmer</em> who wants to display <em>standard music notation</em> on their website.
+				It can also be used for generating MIDI in the browser.</p>
+				<div id="why-music"></div>
+			</section>
+				<div class="card typing-hands">
+					<p>You just need the barest familiarity with JavaScript to make it work.</p>
+					<img src="hands-typing.svg" alt=""></div>
+			</div>
+		</div>
+
+		<div aria-labelledby="tab-how" class="tab-panel" id="how" role='tabpanel'>
+			<h2>How do I use this?</h2>
+			<article class="deck">
+				<section class="card no-shrink with-footer">
+					<div>
+					<h3>Basic Usage</h3>
+					<div id="basic-usage"></div>
+					</div>
+					<div><span class="hand">☞</span><a aria-label='Basic usage demo' href='/abcjs-basic'>Demo</a>
+					</div>
+				</section>
+				<section class="card with-footer no-shrink">
+					<div>
+					<h3>Music Editor</h3>
+					<img class="editor-pic" src="editor.png" alt="">
+					</div>
+					<div>
+					<span class="hand">☞</span><a aria-label='music editor demo' href='/abcjs-editor'>Demo</a>
+					</div>
+				</section>
+				<section class="card with-footer no-shrink">
+					<div>
+					<h3>Existing Sites</h3>
+					<img class="editor-pic" src="plugin-screenshot.png" alt="">
+					</div>
+					<div>
+					<span class="hand">☞</span><a aria-label='plug in demo' href='/abcjs-plugin'>Demo</a>
+					</div>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+					<h3>More Examples</h3>
+					<p>Here is an ever-growing list of examples of common uses.</p>
+					</div>
+					<div>
+					<span class="hand">☞</span><a href="https://paulrosen.github.io/abcjs/examples/toc.html">Examples using abcjs</a>
+					</div>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+					<h3>Documentation</h3>
+			<p>The documentation will show you all the details about including this on your website.</p>
+					</div>
+					<div>
+					<span class="hand">☞</span><a href="https://paulrosen.github.io/abcjs/">Official Documentation</a>
+					</div>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+					<h3>Configuring</h3>
+			<p>There are lots of options for how to configure abcjs. To help you get started, see the example generator. (work in progress)</p>
+					</div>
+					<div>
+					<span class="hand">☞</span><a href="https://paulrosen.github.io/abcjs/overview/example-generator.html">Example generator</a>
+					</div>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+					<h3>Online music editor</h3>
+					<p>And here's an application that uses the editor that you are welcome to use if you just want to
+						write music and not worry about all this javascript stuff.</p>
+					</div>
+					<div>
+					<span class="hand">☞</span><a href="https://editor.drawthedots.com">Draw The Dots</a>
+					</div>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+					<h3>WordPress</h3>
+					<p>There are examples of common use cases in a live WordPress installation to help get you started.</p>
+					</div>
+					<div>
+					<span class="hand">☞</span><a href="https://wp.abcjs.net/">WordPress Demo</a>
+					</div>
+				</section>
+			</article>
+		</div>
+
+		<div aria-labelledby="tab-which" class="tab-panel" id="which" role='tabpanel'>
+			<h2>Which one do I need?</h2>
+			<article class="deck">
+				<section class="card">
+			<h3>Packaged Method</h3>
+			<p>
+				<span class="hand">☞</span>If you are using a system that includes a <span class="code">package.json</span> file, then you can simply install abcjs the way you normally would:</p>
+					<p><span class="code">npm install -D abcjs</span>
+			</p>
+				</section>
+
+				<section class="card">
+			<h3>Minimized Method</h3>
+					<p><span class="hand">☞</span>For use with a <span class="code">&lt;script&gt;</span> tag:</p>
+			<p>The abcjs libraries come in two flavors:</p>
+			<ul class="flavor-list">
+				<li><em>abcjs basic</em>: Call the library from javascript, passing the abc string to it, or allow the user to type the music in a textarea.</li>
+				<li><em>abcjs plugin</em>: Adds onto a webpage, rendering all ABC it finds.</li>
+			</ul>
+				</section>
+
+				<section class="card with-footer">
+					<div>
+			<h3>WordPress</h3>
+			<p><span class="hand">☞</span>If you are using <em>WordPress</em>, you can use the "ABC Notation" plugin. Just click "Add New" on the plugin page and search for "ABC Notation". Or get it here:</p>
+					</div>
+					<div>
+					<a class="button-like" href="https://wordpress.org/plugins/abc-notation/" target="_blank">WordPress Plugin</a>
+					</div>
+				</section>
+
+				<section class="card">
+			<h3>Add In</h3>
+			<p><span class="hand">☞</span>If you already have ABC notation on your page and don't want to modify the page more than you have to, then you can use <em>abcjs-plugin</em>, which will render all ABC that it finds on the page on page load, simply by including one line: the line to include the script. This can also be useful if you allow user comments and you want users to be able to add ABC in a comment.</p>
+				</section>
+		</div>
+
+		<div aria-labelledby="tab-where" class="tab-panel" id="where" role='tabpanel'>
+			<h2>Where do I get this?</h2>
+			<article class="deck">
+
+			<section class="card">
+				<h3>Github</h3>
+			<p>The project is hosted on <a href="https://github.com/paulrosen/abcjs">Github</a>. Go there for all technical information about the project.</p>
+			</section>
+
+			<section class="card">
+				<h3>npm</h3>
+			<p>To install with npm: <span class="code">npm install -D abcjs</span></p>
+				<p>To use: <div class="code">import abcjs from "abcjs";<br><br>abcjs.renderAbc(...)</div></p>
+			</section>
+
+			<section class="card with-footer">
+				<div>
+				<h3>&lt;script&gt;</h3>
+			<p>If you are not using a build package and want to include the minimized scripts directly on your page, click on this to download the latest version:</p>
+				</div>
+				<div>
+				<a class="button-like" href="abcjs-basic-min.js" download>&DownArrowBar; Download abcjs</a>
+				</div>
+			</section>
+
+			<section class="card with-footer">
+				<div>
+				<h3>Plugin</h3>
+				<p>To interpret ABC strings on an existing webpage, download this and include it on your webpage:</p>
+				</div>
+				<div>
+				<a class="button-like" href="abcjs-plugin-min.js" download>&DownArrowBar; Download plugin</a>
+				</div>
+			</section>
+			</article>
+		</div>
+
+		<div aria-labelledby="tab-can-i" class="tab-panel" id="can-i" role='tabpanel'>
+			<h2>Can I use this in my own site?</h2>
+			<div class="splash">
+			<div class="yes">Yes!</div>
+			</div>
+			<p>
+				We hope you find this library useful and we'd like to see you use it on your own site, whether it is personal, community, or commercial software.</p>
+<p>
+	It is available under the <em><a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a></em> license.
+				If you have a problem with this license, please <a class="email">write to us</a>! I'm sure we can work something out.
+			</p>
+			<p>
+				Here it is:
+			</p>
+			<pre class="license">
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+		</pre>
+		</div>
+	</div>
+
+<footer>
+	<a href="https://github.com/paulrosen/abcjs">abcjs</a> is an open source ABC music notation library, written by <a href="https://github.com/paulrosen">Paul Rosen</a> and <a href="https://github.com/tirno">Gregory Dyke</a>.
+</footer>
+	</main>
+</div>
+</body>
+</html>
